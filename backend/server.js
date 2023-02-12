@@ -1,9 +1,10 @@
 //use terminal command "npm run dev" to start
 
-//connect the .env file, express, and the router
+//connect the .env file, express, mongoose, and the router
 require('dotenv').config()
-const express = require('express')
+const express = require('express') 
 const routes = require('./routes/routes')
+const mongoose = require('mongoose')
 
 
 //express app
@@ -24,9 +25,19 @@ app.use((req, res, next) => {
 //ex "/api/workouts"
 app.use('',routes)
 
-//listen for requests on a specific port
-app.listen(process.env.PORT, () => {
-    console.log("listening on port ", process.env.PORT)
-})
+//connect to the database
+mongoose.connect(process.env.MONG_URI)
+    .then(() => { 
+
+        //listen for requests 
+        app.listen(process.env.PORT, () => {
+            console.log("connected to db & listening on port", process.env.PORT)
+        })
+    })
+    .catch((error) => {
+        console.log(error)
+    })
+
+
 
 
