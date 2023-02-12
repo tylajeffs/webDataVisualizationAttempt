@@ -3,7 +3,7 @@
 //connect the .env file, express, mongoose, and the router
 require('dotenv').config()
 const express = require('express') 
-const routes = require('./routes/routes')
+const routes = require('./routes/students')
 const mongoose = require('mongoose')
 
 
@@ -21,9 +21,7 @@ app.use((req, res, next) => {
 })
 
 //get all the routes from the routes file and attatch them
-//can add something in first parameter to change the url
-//ex "/api/workouts"
-app.use('',routes)
+app.use('/api/students',routes)
 
 //connect to the database
 mongoose.connect(process.env.MONG_URI)
