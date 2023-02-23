@@ -1,6 +1,7 @@
 //use terminal command "npm run dev" to start
 import express from "express"
 import mysql2 from "mysql2"
+import cors from 'cors'
 
 //express app
 const app = express()
@@ -13,13 +14,16 @@ const db = mysql2.createConnection({
     database: "cs490"
 })
 
+app.use(express.json())
+app.use(cors())
+
 //root connection 
 app.get("/", (req,res)=> {
     res.json("Hi! This is the back end")
 })
 
 //connect 
-app.get("/students", (req,res)=> {
+app.get("/parallel", (req,res)=> {
     //create the SQL statement
     const q = "SELECT * FROM cis2012_students"
     //send it to the database
