@@ -1,41 +1,36 @@
 //use terminal command "npm run dev" to start
-
-//connect the .env file, express, mongoose, and the router
-require('dotenv').config()
-const express = require('express') 
-const routes = require('./routes/students')
-const mongoose = require('mongoose')
-
+import express from "express"
+import mysql2 from "mysql2"
 
 //express app
 const app = express()
 
-//MIDDLEWARE (app.use)
-//checks to see if there is any data in the request, if there is it will attatch it
-app.use(express.json())
-
-//this fires every time a request comes in, just logs everything
-app.use((req, res, next) => {
-    console.log(req.path, req.method)
-    next()
+//database
+const db = mysql2.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "mysqlserver",
+    database: "cs490"
 })
 
-//get all the routes from the routes file and attatch them
-app.use('/api/students',routes)
+//root connection 
+app.get("/", (req,res)=> {
+    res.json("Hi! This is the back end")
+})
 
-//connect to the database
-mongoose.connect(process.env.MONG_URI)
-    .then(() => { 
-
-        //listen for requests 
-        app.listen(process.env.PORT, () => {
-            console.log("connected to db & listening on port", process.env.PORT)
-        })
+//connect 
+app.get("/students", (req,res)=> {
+    //create the SQL statement
+    const q = "SELECT * FROM cis2012_students"
+    //send it to the database
+    db.query(q,(err,data)=>{
+        if(err) return res.json(err)
+        return res.json(data)
     })
-    .catch((error) => {
-        console.log(error)
-    })
+})
 
-
-
+//connect to the backend
+app.listen(8800, ()=> {
+    console.log("connected to the backend!")
+})
 
