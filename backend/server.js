@@ -22,8 +22,19 @@ app.get("/", (req,res)=> {
     res.json("Hi! This is the back end")
 })
 
-//connect 
-app.get("/parallel", (req,res)=> {
+//connect to the 2012 database
+app.get("/parallel/2012", (req,res)=> {
+    //create the SQL statement
+    const q = "SELECT * FROM cis2012_students"
+    //send it to the database
+    db.query(q,(err,data)=>{
+        if(err) return res.json(err)
+        return res.json(data)
+    })
+})
+
+//connect to the 2019 database
+app.get("/parallel/2019", (req,res)=> {
     //create the SQL statement
     const q = "SELECT * FROM cis2012_students"
     //send it to the database
