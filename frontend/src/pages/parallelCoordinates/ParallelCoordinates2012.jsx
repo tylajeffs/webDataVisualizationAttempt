@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import axios from 'axios'
 import {Link} from "react-router-dom";
-import ParallelCoordinatesGraph from './ParCoordsGraph2012';
+import ParallelCoordinatesGraph from '../graphs/ParCoordsGraph2012';
 
 
 

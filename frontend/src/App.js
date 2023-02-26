@@ -1,9 +1,9 @@
 import {BrowserRouter, Routes,Route} from "react-router-dom";
-import ParallelCoordinates from "./pages/ParallelCoordinates2012";
+import ParallelCoordinates from "./pages/parallelCoordinates/ParallelCoordinates2012";
 import HomePage from "./pages/HomePage";
-import MyParallelCoords2012 from "./pages/ParallelCoordinates2012";
-import MyParallelCoords2019 from "./pages/ParallelCoordinates2019";
-import MyParallelCoordsMarathon from "./pages/ParallelCoordinatesMarathon";
+import MyParallelCoords2012 from "./pages/parallelCoordinates/ParallelCoordinates2012";
+import MyParallelCoords2019 from "./pages/parallelCoordinates/ParallelCoordinates2019";
+import MyParallelCoordsMarathon from "./pages/parallelCoordinates/ParallelCoordinatesMarathon";
 
 
 function App() {
